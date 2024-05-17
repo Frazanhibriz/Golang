@@ -1,0 +1,57 @@
+program soal_dua
+kamus
+      constant NMAX : integer <- 1000
+      type tabInt : array [1..NMAX] of integer
+      A1, A2, irisan : tabInt
+      B1, B2, banyak_Iris : integer
+algoritma
+      input(B1)
+      baca(A1, A1)
+      input(B2)
+      baca_array(A2, B2)
+      irisan_Array(irisan, nIris, A1, A2, B1, B2)
+      cetak_array(irisan, banyak_Iris)
+endprogram
+
+procedure baca_array(in/out A : tabInt, in n : integer)
+{IS terdefinisi array A dengan tipe data tabInt dan n banyak data
+FS array berisi data sebanyak n}
+kamus
+      i : integer
+algoritma
+      if n > NMAX then
+            n <- NMAX
+      endif
+      for i = 1 to n do
+            input(A[i])
+	    A[i] <- input
+      endfor
+endprocedure
+
+procedure irisan_Array(in/out irisan : tabInt, in/out jum_i : integer in arr1, arr2 tabInt, in n1, n2 : integer)
+{IS terdefinisi array irisan, A1, A2 dengan tipe data tabInt, jum_i dengan total banyak i, dan n1, n2 dengan tipe data integer
+FS irisan diisi oleh elemen yang ada di A1 dan A2 dan jumlah total elemen yang ada didalam irisan}
+kamus
+      i, j : integer
+algoritma
+      for i <- 1 to n1 do
+            for j <-1 to n2 do
+                  if arr1[i] == arr2[j] then
+                        irisan[ni] <- arr1[i]
+                        jum_i++
+                  endif
+            endfor
+      endfor
+endprocedure
+
+procedure cetak_array(in/out A : tabInt, in n : integer)
+{IS terdefisini array A dengan tipe data tabInt , dan n banyak data dalam integer
+FS mencetak irisan array}
+kamus
+      i : integer
+algoritma
+      output("Irisan: ")
+      for i <- 1 to n do
+            output(A[i], " ")
+      endfor
+endprocedure
