@@ -1,0 +1,54 @@
+Program Himpunan
+Kamus
+    constant NMAX : integer <- 100
+    type tabInt : array[1...NMAX] of integer
+    bil : tabInt
+    n : integer
+Algoritma
+    output("Masukkan Jumlah Bilangan")
+    input(n)
+
+    inputBilangan(bil, n)
+    frekuensi(bil, n)
+
+Endprogram
+
+Procedure inputBilangan(in/out b : tabInt, n : integer)
+{IS: terdefinisi array b dengan tipe data tabInt dan n banyak data
+FS: array berisi data sebanyak n}
+Kamus
+    i : integer
+Algoritma
+    output("Masukkan bilangan: ")
+    for i <- 1 to n do
+        input(b[i])
+    endfor
+Endprocedure
+
+Procedure frekuensi(b : tabInt, n : integer)
+{IS : array b dengan tipe data tabInt sudah terdefinisi dan n banyak data untuk menentukan valid atau tidak dari sebuah himpunan 
+FS : array b sudah ditentukan dalam boolean dan tercetak valid atau tidak valid dalam string}
+Kamus
+    found : boolean
+    i, j, x : integer
+Algoritma
+    for i <- 1 to n do
+        x <- b[i]
+        found <- false
+        for j <- 1 to n do
+            if b[j] == x then
+                found <- true
+                break
+            endif
+        endfor
+
+        if found then 
+            output("tidak valid")
+            break
+        endif
+    endfor
+
+    if not found then
+        output("valid")
+    endif
+Endprocedure

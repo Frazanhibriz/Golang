@@ -1,0 +1,64 @@
+Program GabDuaHimpunan 
+Kamus 
+	Constant NMAX : integer = 100 
+	type tabint : array[1…NMAX] of integer 
+	arr : tabint 
+	nA, nB, nG : arr 
+	iA, iB, iG : integer 
+Algoritma 
+	input(iA, iB) 
+	masukan(nA, iA) 
+	masukan(nB, iB) 
+	masukanG(nG, nA, nB, iG, iA, iB) 
+	cetak(nG, iG) 
+Endprogram 
+Procedure masukan(in/out A : tabint, in n : integer)  
+{I.S : tersedia data bilangan bulat pada piranti masukan 
+F.S array a berisi data dengan ukuran n} 
+Kamus 
+	i : integer 
+Algoritma 
+	for i <- 1 to n do 
+		input(A[i]) 
+	endfor 
+Endprocedure 
+Procedure masukanG(in/out G : tabint, A, B arr, in/out iG : integer, in/out iA, iB : integer)  
+{I.S : tersedia data bilangan bulat pada piranti masukan 
+F.S array G berisi data} 
+Kamus 
+	A : integer 
+Algoritma 
+	for i <- 1 to iA do  
+		G[iG] = A[i] 
+  		iG <- iG + 1 
+ 	endfor 
+ 	for j <- 1 to iB do 
+ 		a = findData(G, B, j, iA) 
+  		if a == -1 then 
+  			G[iG] = B[j] 
+  			iG <- iG + 1 
+ 		endif 
+	endfor 
+Endprocedure 
+ 
+Function findData(nilaiG, nilaiB : tabint, j, iA integer) -> integer 
+Kamus 
+	hasil integer 
+Algoritma 
+ 	hasil = -1 
+ 	for i <- 1 to iA do 
+  		if nilaiG[i] == nilaiB[j] then 
+   			hasil = j 
+  		endif 
+ 	endfor 
+ 	return hasil 
+Endfunction 
+Procedure cetak(in nG : tabint, in/out iG : integer)  
+{I.S : terdefinisi I bilangan bulat bernilai 1 
+F.S keluaran berupa bilangan bulat} 
+Kamus 
+Algoritma 
+	for i <- 1 to iG do  
+  		Output(nG[i]) 
+ 	endfor 
+Endprocedure
