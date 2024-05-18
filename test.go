@@ -1,0 +1,31 @@
+package main
+
+import (
+	"fmt"
+)
+
+const N int = 1000
+
+func main() {
+	var T [N]int
+	var jumlah int
+	fmt.Scanln(&jumlah)
+	for i := 0; i < jumlah; i++ {
+		fmt.Scan(&T[i])
+	}
+	fmt.Println(genapTerbesar(T, jumlah))
+}
+
+func genapTerbesar(T [N]int, jumlah int) int {
+	// Mengembalikan bilangan genap terbesar dalam array T dengan banyak data sebanyak jumlah
+	greaterEven := -1 
+
+	for i := 0; i < jumlah; i++ {
+		if T[i]%2 == 0 {
+			if T[i] > greaterEven {
+				greaterEven = T[i]
+			}
+		}
+	}
+	return greaterEven
+}
