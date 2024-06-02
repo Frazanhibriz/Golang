@@ -1,0 +1,173 @@
+package main
+
+import "fmt"
+
+const NMAX int = 100000
+
+type Pengguna struct {
+	Nama     string
+	Email    string
+	Password string
+	Role     string
+}
+
+type DataKonsultasi struct {
+	Identitas  Pengguna
+	Pertanyaan string
+	Tanggapan  [NMAX]DataRespon
+	tag        Tags
+}
+
+type DataRespon struct {
+	Identitas Pengguna
+	Response  string
+}
+
+type Tags struct {
+	TagByString  string
+	TagByInteger int
+}
+
+var User [NMAX]Pengguna
+var Konsultasi [NMAX]DataKonsultasi
+
+var JumlahUser int
+var JumlahTanggapan int
+var JumlahDataKonsul int
+
+func main() {
+	var pilih int
+
+	for {
+		fmt.Println("------------------------------------------")
+		fmt.Println("|  Selamat Datang di Aplikasi My Health  |")
+		fmt.Println("------------------------------------------")
+		fmt.Println("|               Menu Utama               |")
+		fmt.Println("------------------------------------------")
+		fmt.Println("1. Daftar")
+		fmt.Println("2. Masuk")
+		fmt.Println("3. Lihat Forum Konsultasi")
+		fmt.Println("4. Keluar")
+		fmt.Println("------------------------------------------")
+		fmt.Print("Masukkan Pilihan Anda : ")
+		fmt.Scan(&pilih)
+		fmt.Println("------------------------------------------")
+
+		switch pilih {
+		case 1:
+			Daftar()
+		case 2:
+			Masuk()
+		case 3:
+			LihatForum()
+		case 4:
+			return
+		default:
+			fmt.Println("Pilihan Tidak Tersedia")
+		}
+	}
+}
+
+func Daftar() {
+	var daftar Pengguna
+
+	fmt.Println("------------------------------------------")
+	fmt.Println("|                Daftar                  |")
+	fmt.Println("------------------------------------------")
+	fmt.Print("Nama : ")
+	fmt.Scan(&daftar.Nama)
+	fmt.Print("Email : ")
+	fmt.Scan(&daftar.Email)
+	fmt.Print("Password : ")
+	fmt.Scan(&daftar.Password)
+	fmt.Print("Role : ")
+	fmt.Scan(&daftar.Role)
+	fmt.Println("------------------------------------------")
+
+	if cekSudahDaftar(daftar.Email, daftar.Password) {
+		fmt.Println("Email Sudah Terdaftar")
+	} else {
+		User[JumlahUser] = daftar
+		JumlahUser++
+		fmt.Println("Pendaftaran Berhasil")
+	}
+
+}
+
+func Masuk() {
+	var email, password string
+
+	fmt.Println("------------------------------------------")
+	fmt.Println("|                 Masuk                  |")
+	fmt.Println("------------------------------------------")
+	fmt.Print("Masukkan email anda : ")
+	fmt.Scanln(&email)
+	fmt.Print("Masukkan password anda : ")
+	fmt.Scan(&password)
+	fmt.Println("------------------------------------------")
+
+	if cekSudahDaftar(email, password) {
+		fmt.Println("Berhasil Untuk Masuk")
+	} else {
+		fmt.Println("Gagal Untuk Masuk")
+	}
+
+}
+
+func cekSudahDaftar(email, password string) bool {
+	for i := 0; i < JumlahUser; i++ {
+		if User[i].Email == email || User[i].Password == password {
+			return true
+		} else {
+			return false
+		}
+	}
+	return false
+}
+
+func LihatForum() {
+	fmt.Println("---------------------------------------------")
+	fmt.Println("|          Daftar Forum Konsultasi          |")
+	fmt.Println("---------------------------------------------")
+	for i := 0; i < JumlahDataKonsul; i++ {
+		fmt.Printf("Pertanyaan dari %s\n : ", Konsultasi[i].Identitas.Nama)
+		fmt.Println(Konsultasi[i].Pertanyaan)
+		for j := 0; j < JumlahTanggapan; j++ {
+			fmt.Printf("Tanggapan dari %s\n : ", Konsultasi[i].Tanggapan[j].Identitas.Nama)
+			fmt.Println(Konsultasi[i].Tanggapan[j].Response)
+		}
+	}
+
+}
+
+func MenuKonsultasi() {
+	var pilih int
+
+	for {
+		fmt.Println("-----------------------------------------------")
+		fmt.Println("|               Menu Konsultasi               |")
+		fmt.Println("-----------------------------------------------")
+		fmt.Println("1. Post Pertanyaan")
+		fmt.Println("2. Post Tanggapan")
+		fmt.Println("3. Lihat/Cari Pertanyaan")
+		fmt.Println("4. Keluar")
+		fmt.Println("-----------------------------------------------")
+		fmt.Print("Masukkan Pilihan Anda : ")
+		fmt.Scan(&pilih)
+		fmt.Println("-----------------------------------------------")
+
+		switch pilih {
+		case 1:
+			PostPertanyaan()
+		case 2:
+			PostTanggapan()
+		case 3:
+			LihatPertanyaan()
+		case 4:
+			return
+		default:
+			fmt.Println("Pilihan Tidak Tersedia")
+		}
+
+	}
+}
